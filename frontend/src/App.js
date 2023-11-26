@@ -10,7 +10,7 @@ const App = () => {
     //Verifica se existe algum dado no localStorage, se sim ele transforma em JSON, caso não ele retorna uma lista vazia
     data ? JSON.parse(data) : []
   )
-  const [Income, setIncome] = useState(0)
+  const [income, setIncome] = useState(0)
   const [expense, setExpense] = useState(0)
   const [total, setTotal] = useState(0)
 
@@ -18,16 +18,16 @@ const App = () => {
     // filtrando e pegando as saídas e entradas
     const amountExpense = transactionsList
       .filter((item) => item.expense)
-      .map((transaction) => Number(transaction.amount))
+      .map((transaction) => Number(transaction.amount));
 
     const amountIncome = transactionsList
       .filter((item) => !item.expense)
-      .map((transaction) => Number(transaction.amount))
+      .map((transaction) => Number(transaction.amount));
 
     // Fazendo um reduce para fazer a soma de todas as saídas
-    const expense = amountExpense.reduce((acc, cur) => acc + cur, 0).toFixed(2)
+    const expense = amountExpense.reduce((acc, cur) => acc + cur, 0).toFixed(2);
     // Fazendo um reduce para fazer a soma de todas as entradas
-    const income = amountIncome.reduce((acc, cur) => acc + cur, 0).toFixed(2)
+    const income = amountIncome.reduce((acc, cur) => acc + cur, 0).toFixed(2);
 
     // Somando o total
     const total = Math.abs(income - expense).toFixed(2)
@@ -49,8 +49,8 @@ const App = () => {
   return (
     <>
       <Header />
-      <Resumo income={Income} expense={expense} total={total} />
-      <Form handleAdd={handleAdd} />
+      <Resumo income={income} expense={expense} total={total} />
+      <Form handleAdd={handleAdd} transactionsList={transactionsList} setTransactionsList={setTransactionsList} />
       <GlobalStyle />
     </>
 
